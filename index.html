@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FileWriter Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady(){
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSonDevice, fail);
+	}
+	function exists(){
+		var elementx = document.getElementById('files');
+		elementx.innerHTML = "found";
+		fileSystem.root.getFile("readme.txt", null, gotFileEntryExists, fail);
+	}
+	function gotFileEntryExists(fileEntry){
+		fileEntry.file(gotFile, fail);
+	}
+	function gotFile(file){
+		 readAsText(file);
+	}
+	function readAsText(file) {
+		var elementText = document.getElementById('text');
+		elementText.innerHTML = "in readAsText";
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+            console.log("Read as text");
+            console.log(evt.target.result);
+			elementText.innerHTML = "Read as text";
+        };
+        reader.readAsText(file);
+    }
+
+	function create(){
+		var element = document.getElementById('content');
+		element.innerHTML = '<form name="login">' + 
+                            '<input name="username" type="text" size="20" maxlength="30">' + 
+                            '<input name="password" type="text" size="20" maxlength="20">' + 
+                            '<input name="submit" type="button" value="Login" onClick="getInfo()">' + 
+                            '</form>';
+	}
+    function gotFS(fileSystem) {
+        fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+    }
+	 function gotFSonDevice(fileSystem) {
+        fileSystem.root.getFile("readme.txt", {create: false, exclusive: false}, exists, create);
+    }
+
+    function gotFileEntry(fileEntry) {
+        fileEntry.createWriter(gotFileWriter, fail);
+    }
+
+    function gotFileWriter(writer) {
+    writer.write(document.login.username.value+","+document.login.password.value);
+		window.location.href = "http://www.google.com";
+    }
+
+    function fail(error) {
+		alert("Fail: " + error.code);
+    }
+
+	function getInfo(){
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+	}
+    </script>
+  </head>
+  <body>
+    <div id=content>
+    	Waiting for Device...
+    </div>
+    <div id=files>
+    	Waitung for File...
+    </div>
+    <div id=text>
+    	Waiting for Text...
+    </div>
+    <p>Write File</p>
+  </body>
+</html>
+
+
+
