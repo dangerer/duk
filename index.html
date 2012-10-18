@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>FileWriter Example</title>
-	<link type="text/css" rel="stylesheet" href="css/index.css" />
+	<link type="text/css" rel="stylesheet" href="css/index.css" />	
     <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
     <script type="text/javascript" charset="utf-8">
-	 var storage_dir = 'Android/data/com.dukapp/';
+	 var storage_dir = 'dukapp/';
 	 var filename_users = storage_dir+'users.cdb';
 	 var user_login = "";
 	 var user_password = "";
@@ -61,10 +61,10 @@
     }
 
 	function create(){
-//		alert('11');
+		alert('11');
 		var element = document.getElementById('content');
 		element.innerHTML = '<form name="login">' + 
-							'<div class="block_login block"> ' +
+							'<div class="block_login block">' +
 							'<div class="header"><div class="title"><h2><img src="img/logo.png" height=40> Login</h2></div></div>' +
 							'<div class="content">' + 
 							'<div class="field"><label for="login_domain">Domain</label><input id="login_domain" name="domain" type="text" value="'+DOMAIN+'"></div>' + 
