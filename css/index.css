@@ -32,63 +32,64 @@
 }
 
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
-}
-
-.status {
-    background-color:#333333;
-    border-radius:4px;
-/*    -webkit-border-radius:4px;*/
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
-}
-
-.status.complete {
-    background-color:#4B946A;
-}
-
 .hide {
     display:none;
 }
 
 
-.block {
-    border: 1px solid #C6BDA8;
-    margin-bottom: 0.5em;
+body, html {
+    height:100%;
+    margin:0;
+    padding:0;
 }
 
-.block .header .title {
-    background-color: #E3DFD4;
-    vertical-align: middle;
-    clear: both;
-    font-size: 20px;
-}
 
-.block .field {
-    font-size:16px;
+/* ----------- */
+
+
+.ui-header {
+    left: 0;
+    position: relative;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #3A6C9F repeat scroll 0 0;
+    border: 1px solid #456F9A;
+    color: #FFFFFF;
     font-weight: bold;
-    padding: 0px 4px;
+    text-shadow: 0 1px 1px #3E6790;
+    margin: 0px;
 }
 
-.block_login input {
-    width: 90%;
-}
 
-.block_login .btn {
-    margin-top: 0.5em;
+.ui-header .ui-title {
+    display: block;
+    font-size: 16px;
+    outline: 0 none !important;
+    overflow: hidden;
+    padding: 0;
     text-align: center;
-    width: 40%;
+    white-space: nowrap;
 }
 
-.block_submit {
-   text-align: center;	
-   font-size: 16px;
+.ui-content {
+    padding: 4px;
 }
+
+.login_form {
+    text-align: center;
+}
+
+.login_form input {
+    font-size: 20px;
+    width: 90%;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -border-radius:10px;
+    height: 40px;
+}
+
+.login_form input .btn{
+    width: 95%;
+}
+

@@ -64,14 +64,13 @@
 //		alert('11');
 		var element = document.getElementById('content');
 		element.innerHTML = '<form name="login">' + 
-							'<div class="block_login block">' +
-							'<div class="header"><div class="title"><h2><img src="img/logo.png" height=40> Login</h2></div></div>' +
-							'<div class="content">' + 
-							'<div class="field"><label for="login_domain">Domain</label><input id="login_domain" name="domain" type="text" value="'+DOMAIN+'"></div>' + 
-                            '<div class="field"><label for="login_username">Username</label><input id="login_username" name="username" type="text" value=""></div>' + 
-                            '<div class="field"><label for="login_password">Password</label><input id="login_password" name="password" type="text" value=""></div>' + 
+							'<div class="description">Login here using your username and password</div>' + 
+							'<div class="login_form">' +
+							'<div class="form-label"><label class="ui-input-text" for="login_domain">Domain</label></div><div class="form-input"><input class="ui-input-text" id="login_domain" name="domain" type="text" value="'+DOMAIN+'"></div>' + 
+                            '<div class="form-label"><label class="ui-input-text" for="login_username">Username</label></div><div class="form-input"><input id="login_username" name="username" type="text" value=""></div>' + 
+                            '<div class="form-label"><label class="ui-input-text" for="login_password">Password</label></div><div class="form-input"><input id="login_password" name="password" type="text" value=""></div>' + 
                             '<div class="block_submit"><input name="submit" class="btn" type="button" value="Login" onClick="getInfo()"></div>' + 
-							'</div></div>' +
+							'</div>' +
                             '</form>';
 	}
     function gotFS(fileSystem) {
@@ -105,6 +104,10 @@
     </script>
   </head>
   <body>
+	<div class="ui-header">
+      <h1 class="ui-title">Quoodle</h1>
+    </div>  
+	<div class="ui-content">
     <div id="content">
     </div>
     <div id="text">
@@ -115,6 +118,8 @@
 		password <input type="password" size="100" value="" name="password" id="password"><br>
 		<input type="submit" value="submit">
 	</form>
+	</div>
+	<br><Br><Br><Br><Br><br><br><Br><Br><Br><Br><br><br><Br><Br><Br><Br><br><br><Br><Br><Br><Br><br>
 	</div>
   </body>
 </html>
