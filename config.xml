@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.mmurauergtn.test"
         version   = "1.0.0">
-    <name>Duk App</name>
+    <name>Quoodle</name>
 
     <description>
         Connect to Moodle and save userdata
