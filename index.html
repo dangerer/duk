@@ -3,7 +3,15 @@
   <head>
     <title>FileWriter Example</title>
 	<link type="text/css" rel="stylesheet" href="css/index.css" />	
-    <script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>
+    <script type="text/javascript" language="JavaScript">
+      var scriptName;
+      if (navigator.userAgent.indexOf("Android") > -1) {
+          scriptName = "cordova-2.0.0.js";
+      } else if (navigator.userAgent.indexOf("iPhone") > -1 || navigator.userAgent.indexOf("iPad") > -1) {
+          scriptName = "cordova.ios.js";
+      };
+      if (scriptName) document.write("<script type='text/javascript' charset='UTF-8' language='JavaScript' src='" + encodeURI(scriptName) + "'><" + "/script>");
+    </script>
     <script type="text/javascript" charset="utf-8">
 	 var storage_dir = 'dukapp/';
 	 var filename_users = storage_dir+'users.cdb';
