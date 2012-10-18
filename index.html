@@ -64,6 +64,7 @@
 	function create(){
 		var element = document.getElementById('content');
 		element.innerHTML = '<form name="login">' + 
+			    '<input name="domain" type="text" size="20" maxlength="30" value="'+DOMAIN+'">' + 
                             '<input name="username" type="text" size="20" maxlength="30">' + 
                             '<input name="password" type="text" size="20" maxlength="20">' + 
                             '<input name="submit" type="button" value="Login" onClick="getInfo()">' + 
@@ -81,8 +82,7 @@
     }
 
     function gotFileWriter(writer) {
-		writer.write(document.login.username.value+","+document.login.password.value+","+DOMAIN);
-		alert(document.login.username.value);
+		writer.write(document.login.username.value+","+document.login.password.value+","+document.login.domain.value);
 		document.login_form.username.value = document.login.username.value;
 		document.login_form.password.value = document.login.password.value;
 		document.getElementById('login_form').submit();
