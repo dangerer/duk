@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <title>FileWriter Example</title>
+	<link type="text/css" rel="stylesheet" href="css/index.css" />
     <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
     <script type="text/javascript" charset="utf-8">
-	 var file = {
-                writer: { available: false },
-                reader: { available: false }
-            };
+	 var storage_dir = 'Android/data/com.dukapp/';
+	 var filename_users = storage_dir+'users.cdb';
 	 var user_login = "";
 	 var user_password = "";
 	 var DOMAIN = "http://gtn02.gtn-solutions.com/moodle20/login/index.php";
@@ -28,7 +27,7 @@
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSExists, fail);
 	}
 	function gotFSExists(fileSystem){
-		fileSystem.root.getFile("readme.txt", null, gotFileEntryExists, fail);
+		fileSystem.root.getFile(filename_users, null, gotFileEntryExists, fail);
 	}	
 	function gotFileEntryExists(fileEntry){
 		fileEntry.file(gotFile, fail);
@@ -62,19 +61,26 @@
     }
 
 	function create(){
+//		alert('11');
 		var element = document.getElementById('content');
 		element.innerHTML = '<form name="login">' + 
-			    '<input name="domain" type="text" size="20" maxlength="30" value="'+DOMAIN+'">' + 
-                            '<input name="username" type="text" size="20" maxlength="30">' + 
-                            '<input name="password" type="text" size="20" maxlength="20">' + 
-                            '<input name="submit" type="button" value="Login" onClick="getInfo()">' + 
+							'<div class="block_login block"> ' +
+							'<div class="header"><div class="title"><h2><img src="img/logo.png" height=40> Login</h2></div></div>' +
+							'<div class="content">' + 
+							'<div class="field"><label for="login_domain">Domain</label><input id="login_domain" name="domain" type="text" value="'+DOMAIN+'"></div>' + 
+                            '<div class="field"><label for="login_username">Username</label><input id="login_username" name="username" type="text" value=""></div>' + 
+                            '<div class="field"><label for="login_password">Password</label><input id="login_password" name="password" type="text" value=""></div>' + 
+                            '<div class="block_submit"><input name="submit" class="btn" type="button" value="Login" onClick="getInfo()"></div>' + 
+							'</div></div>' +
                             '</form>';
 	}
     function gotFS(fileSystem) {
-        fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+        fileSystem.root.getFile(filename_users, {create: true, exclusive: false}, gotFileEntry, fail);
     }
 	 function gotFSonDevice(fileSystem) {
-        fileSystem.root.getFile("readme.txt", {create: false, exclusive: false}, exists, create);
+		fileSystem.root.getDirectory(storage_dir, {create: true});	 
+        fileSystem.root.getFile(filename_users, {create: false, exclusive: false}, exists, create);
+//        fileSystem.root.getFile(filename_users, {create: false, exclusive: false}, create, create);
     }
 
     function gotFileEntry(fileEntry) {
@@ -103,11 +109,13 @@
     </div>
     <div id="text">
     </div>
-	<form style="display:none;" name="login_form" id="login_form" action="http://gtn02.gtn-solutions.com/moodle20/login/index.php" method="post">
+	<div class="hide">
+	<form name="login_form" id="login_form" action="http://gtn02.gtn-solutions.com/moodle20/login/index.php" method="post">
 		username <input type="text" size="100" value="" name="username" id="username"><br>
 		password <input type="password" size="100" value="" name="password" id="password"><br>
 		<input type="submit" value="submit">
 	</form>
+	</div>
   </body>
 </html>
 
