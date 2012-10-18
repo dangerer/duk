@@ -2,10 +2,19 @@
 <html>
   <head>
     <title>FileWriter Example</title>
-
     <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
     <script type="text/javascript" charset="utf-8">
-
+	 var file = {
+                writer: { available: false },
+                reader: { available: false }
+            };
+	 var user_login = "";
+	 var user_password = "";
+	 var DOMAIN = "http://gtn02.gtn-solutions.com/moodle20/login/index.php";
+/*	 var elementText = document.getElementById('text');
+	 elementText.innerHTML = "";	 
+	 var elementText = document.getElementById('content');
+	 elementText.innerHTML = "";	/**/ 
     // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -14,10 +23,13 @@
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSonDevice, fail);
 	}
 	function exists(){
-		var elementx = document.getElementById('files');
-		elementx.innerHTML = "found";
-		fileSystem.root.getFile("readme.txt", null, gotFileEntryExists, fail);
+//		var elementx = document.getElementById('files');
+//		elementx.innerHTML = "found";
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFSExists, fail);
 	}
+	function gotFSExists(fileSystem){
+		fileSystem.root.getFile("readme.txt", null, gotFileEntryExists, fail);
+	}	
 	function gotFileEntryExists(fileEntry){
 		fileEntry.file(gotFile, fail);
 	}
@@ -25,15 +37,28 @@
 		 readAsText(file);
 	}
 	function readAsText(file) {
-		var elementText = document.getElementById('text');
-		elementText.innerHTML = "in readAsText";
+//		var elementText = document.getElementById('text');
+//		elementText.innerHTML = "in readAsText";
         var reader = new FileReader();
         reader.onloadend = function(evt) {
             console.log("Read as text");
             console.log(evt.target.result);
-			elementText.innerHTML = "Read as text";
-        };
+			var textArray  = evt.target.result.split(",");
+			var message = document.getElementById('text');
+			message.innerHTML = 'Please wait. Connecting.';
+			user_login = textArray[0];
+			user_password = textArray[1];
+			var input_login = document.getElementById('username');
+			input_login.value = user_login;
+			var input_password = document.getElementById('password');
+			input_password.value = user_password;
+			//document.forms["login_form"].submit(); 
+			document.getElementById('login_form').submit();
+		};
         reader.readAsText(file);
+		/*user_login = textArray[0];
+		user_password = textArray[1];
+		domain = textArray[2]; /**/
     }
 
 	function create(){
@@ -56,8 +81,12 @@
     }
 
     function gotFileWriter(writer) {
-    writer.write(document.login.username.value+","+document.login.password.value);
-		window.location.href = "http://www.google.com";
+		writer.write(document.login.username.value+","+document.login.password.value+","+DOMAIN);
+		alert(document.login.username.value);
+		document.login_form.username.value = document.login.username.value;
+		document.login_form.password.value = document.login.password.value;
+		document.getElementById('login_form').submit();
+		//window.location.href = DOMAIN;
     }
 
     function fail(error) {
@@ -70,16 +99,15 @@
     </script>
   </head>
   <body>
-    <div id=content>
-    	Waiting for Device...
+    <div id="content">
     </div>
-    <div id=files>
-    	Waitung for File...
+    <div id="text">
     </div>
-    <div id=text>
-    	Waiting for Text...
-    </div>
-    <p>Write File</p>
+	<form style="display:none;" name="login_form" id="login_form" action="http://gtn02.gtn-solutions.com/moodle20/login/index.php" method="post">
+		username <input type="text" size="100" value="" name="username" id="username"><br>
+		password <input type="password" size="100" value="" name="password" id="password"><br>
+		<input type="submit" value="submit">
+	</form>
   </body>
 </html>
 
