@@ -1,3 +1,0 @@
-<plugin name="File" value="org.apache.cordova.FileUtils" />
-<plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
-<plugin name="Device" value="org.apache.cordova.Device" />
